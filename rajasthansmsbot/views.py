@@ -19,15 +19,17 @@ API_KEY = "169279AKs6QaxtS7Fd598c2841"
 def Ask(request):
 	question = request.POST.get("message", "")
 	number = request.POST.get("number", "")
-	keyword = request.POST.get("keyword", "")
+	keyword = request.POST	.get("keyword", "")
 
 	q = Query(question=question, keyword=keyword)
 	q.save()
+	response = q.response()
+
 
 	data_payload = {'authkey': API_KEY, 'mobiles': number, 'message':response,
 	'country':'91','route':'4'}
 
-	response = q.response()
+
 	r = requests.get("https://control.msg91.com/api/sendhttp.php?",params = data_payload)
 	print(r.content)
-
+	return HttpResponse("Message recieved")
