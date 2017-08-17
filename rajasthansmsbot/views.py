@@ -17,9 +17,9 @@ API_KEY = "169279AKs6QaxtS7Fd598c2841"
 
 @csrf_exempt
 def Ask(request):
-	question = request.GET.get("message", "")
-	number = request.GET.get("number", "")
-	keyword = request.GET.get("keyword", "")
+	question = request.POST.get("message", "")
+	number = request.POST.get("number", "")
+	keyword = request.POST.get("keyword", "")
 
 	q = Query(question=question, keyword=keyword)
 	q.save()
